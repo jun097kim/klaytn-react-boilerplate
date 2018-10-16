@@ -3,6 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "caver-js": "^0.0.1-b",
+    "grommet": "^1.11.0",
+    "node-sass": "^4.9.4",
     "react": "^16.5.2",
     "react-dom": "^16.5.2",
     "react-scripts": "2.0.5"

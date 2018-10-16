@@ -3,7 +3,7 @@ import CreateWallet from './CreateWallet';
 import GetWallet from './GetWallet';
 import * as CaverWalletAPI from 'lib/caver/wallet';
 
-class Wallet extends Component {
+class WalletTemplate extends Component {
   state = {
     step: 'create',
     walletPw: null
@@ -53,4 +53,4 @@ class Wallet extends Component {
   }
 }
 
-export default Wallet;
+export default WalletTemplate;

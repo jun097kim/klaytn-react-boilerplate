@@ -19,6 +19,7 @@ import Anchor from 'grommet/components/Anchor';
 class Login extends Component {
   state = {
     keystore: null,
+    keystoreMsg: '',
     walletPw: ''
   };
 
@@ -41,10 +42,24 @@ class Login extends Component {
 
   handleLogin = e => {
     e.preventDefault();
+
+    const { keystore, walletPw } = this.state;
+    const { integrateWallet } = this.props;
+
+    try {
+      // keystore에서 프라이빗 키를 가져와서 지갑 인스턴스 생성
+      const { privateKey: privateKeyFromKeystore } = CaverWalletAPI.decrypt(
+        keystore,
+        walletPw
+      );
+      integrateWallet(privateKeyFromKeystore);
+    } catch (e) {
+      this.setState({ keystoreMsg: '비밀번호가 일치하지 않습니다.' });
+    }
   };
 
   render() {
-    const { walletFile, walletPw } = this.state;
+    const { walletFile, walletPw, keystoreMsg } = this.state;
 
     return (
       <Form onSubmit={this.handleLogin} pad="medium">
@@ -61,7 +76,7 @@ class Login extends Component {
                 onChange={this.handleImport}
               />
             </FormField>
-            <FormField label="지갑 비밀번호">
+            <FormField label="지갑 비밀번호" error={keystoreMsg}>
               <PasswordInput
                 name="walletPw"
                 value={walletPw}

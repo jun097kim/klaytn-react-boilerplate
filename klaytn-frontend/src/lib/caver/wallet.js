@@ -1,5 +1,6 @@
 import caver from 'lib/caver';
 
+const accounts = caver.klay.accounts;
 const wallet = caver.klay.accounts.wallet;
 
 // 지갑 생성
@@ -18,7 +19,7 @@ export const encrypt = password => {
 
 // 지갑 복호화
 export const decrypt = (keystoreJson, password) => {
-  return wallet.decrypt(keystoreJson, password);
+  return accounts.decrypt(keystoreJson, password);
 };
 
 // 인메모리 지갑 가져오기

@@ -7,14 +7,18 @@ import PasswordInput from 'grommet/components/PasswordInput';
 import Footer from 'grommet/components/Footer';
 import Button from 'grommet/components/Button';
 
-const CreateWallet = ({ handleChange, handleSubmit }) => {
+const CreateWallet = ({ walletPw, handleChange, handleSubmit }) => {
   return (
     <Form onSubmit={handleSubmit}>
       <FormFields>
         <fieldset>
           <legend>지갑 만들기</legend>
           <FormField label="지갑 비밀번호">
-            <PasswordInput name="walletPw" onChange={handleChange} />
+            <PasswordInput
+              name="walletPw"
+              value={walletPw}
+              onChange={handleChange}
+            />
           </FormField>
         </fieldset>
       </FormFields>

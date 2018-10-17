@@ -1,9 +1,9 @@
 import React from 'react';
 import { Route } from 'react-router-dom';
-import Login from 'components/auth/Login';
+import AuthTemplate from 'components/auth/AuthTemplate';
 
 const Auth = () => {
-  return <Route path="/auth/login" component={Login} />;
+  return <Route path="/auth/login" component={AuthTemplate} />;
 };
 
 export default Auth;

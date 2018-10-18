@@ -46,7 +46,7 @@ const Login = ({
         <Button label="로그인" type="submit" primary fill />
       </Footer>
       <Box align="center">
-        <Anchor href="/wallet" label="회원가입" />
+        <Anchor path="/wallet" label="회원가입" />
       </Box>
     </Form>
   );

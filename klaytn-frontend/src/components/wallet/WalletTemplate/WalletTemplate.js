@@ -6,7 +6,7 @@ import * as CaverWalletAPI from 'lib/caver/wallet';
 class WalletTemplate extends Component {
   state = {
     step: 'create',
-    walletPw: null
+    walletPw: ''
   };
 
   getStepContent = () => {

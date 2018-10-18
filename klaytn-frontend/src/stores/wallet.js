@@ -13,4 +13,10 @@ export default class WalletStore {
     sessionStorage.setItem('walletInstance', JSON.stringify(walletInstance));
     this.walletInstance = walletInstance;
   };
+
+  @action
+  loadWallet = walletInstance => {
+    caver.klay.accounts.wallet.add(walletInstance);
+    this.walletInstance = walletInstance;
+  };
 }

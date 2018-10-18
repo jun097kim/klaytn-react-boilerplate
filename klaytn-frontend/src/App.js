@@ -2,8 +2,7 @@ import React, { Component } from 'react';
 import { Route } from 'react-router-dom';
 import AppTemplate from 'components/base/AppTemplate';
 
-import Auth from 'pages/Auth';
-import Wallet from 'pages/Wallet';
+import { Auth, Wallet, Counter } from 'pages';
 
 class App extends Component {
   render() {
@@ -11,6 +10,7 @@ class App extends Component {
       <AppTemplate>
         <Route path="/auth" component={Auth} />
         <Route path="/wallet" component={Wallet} />
+        <Route path="/counter" component={Counter} />
       </AppTemplate>
     );
   }

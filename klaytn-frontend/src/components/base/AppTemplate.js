@@ -20,6 +20,7 @@ const AppTemplate = ({ children }) => {
         <Box flex={true} justify="end" direction="row" responsive={false}>
           <Menu direction="row" size="small" dropAlign={{ right: 'right' }}>
             <Anchor path="/auth/login">로그인</Anchor>
+            <Anchor path="/counter">카운터</Anchor>
           </Menu>
         </Box>
       </Header>

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Redirect } from 'react-router-dom';
 import { inject, observer } from 'mobx-react';
 import * as CaverWalletAPI from 'lib/caver/wallet';
 import Login from './Login';
@@ -9,6 +10,8 @@ import Login from './Login';
 }))
 @observer
 class AuthTemplate extends Component {
+  redirectToReferrer = false;
+
   state = {
     keystore: null,
     keystoreMsg: '',
@@ -45,6 +48,7 @@ class AuthTemplate extends Component {
         walletPw
       );
       integrateWallet(privateKeyFromKeystore);
+      this.redirectToReferrer = true;
     } catch (e) {
       this.setState({ keystoreMsg: '비밀번호가 일치하지 않습니다.' });
     }
@@ -52,9 +56,13 @@ class AuthTemplate extends Component {
 
   render() {
     const { keystoreMsg, walletFile, walletPw } = this.state;
-    const { walletInstance } = this.props;
+    const { from } = this.props.location.state || { from: { pathname: '/' } };
 
-    return !walletInstance ? (
+    if (this.redirectToReferrer) {
+      return <Redirect to={from} />;
+    }
+
+    return (
       <Login
         handleChange={this.handleChange}
         handleImport={this.handleImport}
@@ -63,7 +71,7 @@ class AuthTemplate extends Component {
         walletFile={walletFile}
         walletPw={walletPw}
       />
-    ) : null;
+    );
   }
 }
 

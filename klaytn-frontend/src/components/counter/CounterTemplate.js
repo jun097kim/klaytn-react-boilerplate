@@ -48,7 +48,6 @@ class CounterTemplate extends Component {
 
   render() {
     const { count } = this.state;
-    console.log(this.isLoading);
 
     return (
       <Box pad="medium" colorIndex="light-2">

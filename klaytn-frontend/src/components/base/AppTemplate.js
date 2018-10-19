@@ -1,4 +1,6 @@
-import React from 'react';
+import React, { Component, Fragment } from 'react';
+import { inject } from 'mobx-react';
+import Loading from 'components/common/Loading';
 
 import GrommetApp from 'grommet/components/App';
 import Header from 'grommet/components/Header';
@@ -12,28 +14,38 @@ import Anchor from 'grommet/components/Anchor';
 import 'grommet/grommet.min.css';
 import './AppTemplate.scss';
 
-const AppTemplate = ({ children }) => {
-  return (
-    <GrommetApp className="AppTemplate">
-      <Header>
-        <Title>Klaytn Boilerplate</Title>
-        <Box flex={true} justify="end" direction="row" responsive={false}>
-          <Menu direction="row" size="small" dropAlign={{ right: 'right' }}>
-            <Anchor path="/auth/login">로그인</Anchor>
-            <Anchor path="/counter">카운터</Anchor>
-          </Menu>
-        </Box>
-      </Header>
-      <Box className="Sections" pad="medium" align="center">
-        {children}
-      </Box>
-      <Footer justify="between">
-        <Box direction="row" align="center" pad={{ vertical: 'medium' }}>
-          <Paragraph margin="none">© 2018 Klaytn Boilerplate</Paragraph>
-        </Box>
-      </Footer>
-    </GrommetApp>
-  );
-};
+@inject(stores => ({
+  isLoading: stores.loading.isLoading
+}))
+class AppTemplate extends Component {
+  render() {
+    const { isLoading, children } = this.props;
+
+    return (
+      <Fragment>
+        <GrommetApp className="AppTemplate">
+          <Header>
+            <Title>Klaytn Boilerplate</Title>
+            <Box flex={true} justify="end" direction="row" responsive={false}>
+              <Menu direction="row" size="small" dropAlign={{ right: 'right' }}>
+                <Anchor path="/auth/login">로그인</Anchor>
+                <Anchor path="/counter">카운터</Anchor>
+              </Menu>
+            </Box>
+          </Header>
+          <Box className="Sections" pad="medium" align="center">
+            {children}
+            {isLoading && <Loading />}
+          </Box>
+          <Footer justify="between">
+            <Box direction="row" align="center" pad={{ vertical: 'medium' }}>
+              <Paragraph margin="none">© 2018 Klaytn Boilerplate</Paragraph>
+            </Box>
+          </Footer>
+        </GrommetApp>
+      </Fragment>
+    );
+  }
+}
 
 export default AppTemplate;

@@ -56,7 +56,9 @@ class AuthTemplate extends Component {
 
   render() {
     const { keystoreMsg, walletFile, walletPw } = this.state;
-    const { from } = this.props.location.state || { from: { pathname: '/' } };
+    const { from } = this.props.location.state || {
+      from: { pathname: '/counter' }
+    };
 
     if (this.redirectToReferrer) {
       return <Redirect to={from} />;

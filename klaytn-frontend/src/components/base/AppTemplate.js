@@ -15,11 +15,17 @@ import 'grommet/grommet.min.css';
 import './AppTemplate.scss';
 
 @inject(stores => ({
+  walletInstance: stores.wallet.walletInstance,
+  removeWallet: stores.wallet.removeWallet,
   isLoading: stores.loading.isLoading
 }))
 class AppTemplate extends Component {
+  handleLogout = () => {
+    this.props.removeWallet();
+  };
+
   render() {
-    const { isLoading, children } = this.props;
+    const { walletInstance, isLoading, children } = this.props;
 
     return (
       <Fragment>
@@ -28,8 +34,14 @@ class AppTemplate extends Component {
             <Title>Klaytn Boilerplate</Title>
             <Box flex={true} justify="end" direction="row" responsive={false}>
               <Menu direction="row" size="small" dropAlign={{ right: 'right' }}>
-                <Anchor path="/auth/login">로그인</Anchor>
                 <Anchor path="/counter">카운터</Anchor>
+                {!!walletInstance ? (
+                  <Anchor path="/" onClick={this.handleLogout}>
+                    로그아웃
+                  </Anchor>
+                ) : (
+                  <Anchor path="/auth/login">로그인</Anchor>
+                )}
               </Menu>
             </Box>
           </Header>

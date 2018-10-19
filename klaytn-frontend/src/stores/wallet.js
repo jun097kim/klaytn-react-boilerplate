@@ -19,4 +19,10 @@ export default class WalletStore {
     caver.klay.accounts.wallet.add(walletInstance);
     this.walletInstance = walletInstance;
   };
+
+  @action
+  removeWallet = () => {
+    sessionStorage.removeItem('walletInstance');
+    this.walletInstance = null;
+  };
 }
